@@ -1,8 +1,15 @@
 from googleapiclient.discovery import build
 import pandas as pd
 import argparse
+import os
+from dotenv import load_dotenv, find_dotenv
 
-api_key = ""
+load_dotenv(find_dotenv())
+
+if "GOOGLE-API-KEY" in os.environ:
+    api_key = os.environ["GOOGLE-API-KEY"]
+else:
+    raise Exception("Please provide Google API Key in the .env file with 'GOOGLE-API-KEY' as the key name.")
 
 def get_comments(video_id, save_data=False):
     # creating youtube resource object

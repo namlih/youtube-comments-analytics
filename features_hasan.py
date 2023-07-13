@@ -43,9 +43,9 @@ def get_sentiment(comment: Comment):
 
 @app.post("/summaries/")
 def get_summary(comment: Comment):
-    print("summarizing the comment:"+comment.comment)
+    # print("summarizing the comment:"+comment.comment)
     start_t = time.time()
-    summary = summarizer(comment.comment, min_length=20)
+    summary = summarizer(comment.comment, min_length=100)
     print("summarization finished in "+str(time.time()-start_t)+" seconds")
     return Summary(summary=summary[0]['summary_text'])
 

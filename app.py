@@ -55,11 +55,14 @@ with tab2:
     st.caption("currently only using top 20 comments by like count. The summarization takes up to 20 seconds to process")
     df.sort_values(by=['likeCount'],ascending=False,inplace=True)
 
-    #theComment = "The video name is Percussive Dub, Spiritual Jazz & Psychedelic Grooves with Millie McKee. "
-    #theComment += "The comments of this videos are listed: "
-    theComment = " "
-    for i, row in df[:20].iterrows():
-        theComment += str(i) + " - " + row.comments + ". "
+    theComment = "This youtube video's name is Percussive Dub, Spiritual Jazz & Psychedelic Grooves with Millie McKee. "
+    theComment += "The fans of her, made these comments about her video : "
+    #theComment = " "
+    for i, row in df[:10].iterrows():
+        #theComment += str(i) + " - " + row.comments + ". "
+        theComment += row.comments + '. '
+    print('comment for summarization:')
+    print(theComment)
     response = requests.post("http://127.0.0.1:8000/summaries/", json={"comment":theComment})
 
     summary = response.json()['summary']
